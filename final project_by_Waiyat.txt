@@ -1,0 +1,84 @@
+drop table patient cascade constraint;
+drop table appointment cascade constraint;
+drop table doctor cascade constraint;
+drop table pat_payment cascade constraint;
+drop table visit cascade constraint;
+drop table billing cascade constraint;
+drop table insurance cascade constraint;
+drop table insure_payment cascade constraint;
+
+create table patient(
+pat_num number (20),
+insur_code varchar(60),
+pat_lname varchar(100) not null,
+pat_fname varchar(100) not null,
+pat_phone varchar(50),
+pat_email varchar(200),
+pat_balance number (20),
+constraint pat_num_pk primary key(pat_num));
+
+create table appointment(
+appt_num number (20),
+appt_date date,
+appt_time varchar(100),
+appt_sched varchar (100),
+pat_num number(20),
+doc_id number(20),
+constraint appt_num_pk primary key(appt_num));
+
+create table doctor(
+doc_id number(20),
+doc_lname varchar(100) not null,
+doc_fname varchar(100) not null,
+doc_initial varchar(100),
+doc_extension varchar (200),
+doc_office varchar(200),
+constraint doc_id_pk primary key(doc_id));
+
+create table pat_payment(
+patpay_num number(20),
+bill_code varchar(100),
+patpay_date date,
+patpay_amount varchar (20),
+patpay_type varchar (100),
+pat_num number (20),
+constraint patpay_num_pk primary key(patpay_num));
+
+create table visit(
+visit_num number(20),
+doc_id number(20),
+pat_num number (20),
+visit_date date,
+visit_time varchar(100),
+visline_problem varchar(200),
+visline_diagnosis varchar(200),
+visline_charge varchar(200),
+constraint visit_num_pk primary key(visit_num));
+
+create table billing(
+bill_code varchar(100),
+bill_date date,
+bill_chg_amount varchar(100),
+bill_pay_amount varchar(100),
+bill_pay_date varchar(100),
+bill_balance varchar(100),
+visit_num number(20),
+constraint bill_code_pk primary key(bill_code));
+
+create table insurance(
+insur_code varchar(60),
+insur_name varchar(200),
+insur_contact varchar(200),
+insur_areacode varchar(200),
+insur_phone varchar(50),
+insur_email varchar(200),
+constraint insur_code_pk primary key(insur_code));
+
+create table insure_payment(
+insurepay_num number(30),
+insur_code varchar(60),
+bill_code varchar(100),
+insurepay_date varchar(200),
+INSURE_AMOUNT varchar(200),
+INSUREPAY_TYPE varchar(200),
+constraint insurepay_num_pk primary key(insurepay_num)); 

@@ -1,0 +1,86 @@
+drop table PATIENT cascade constraints;
+drop table APPOINTMENT cascade constraints;
+drop table DOCTOR cascade constraints;
+drop table PAT_PAYMENT cascade constraints;
+drop table VISIT cascade constraints;
+drop table BILLING cascade constraints;
+drop table INSURANCE cascade constraints;
+drop table INSURE_PAYMENT cascade constraints;
+
+create table PATIENT
+(PAT_NUM number(38),
+PAT_LNAME varchar2(38),
+PAT_FNAME varchar2(38),
+PAT_PHONE varchar2(38),
+PAT_EMAIL varchar2(38),
+PAT_BALANCE varchar2(38),
+INSUR_CODE number(38),
+constraint PATIENT_PAT_NUM_PK primary key(PAT_NUM));
+
+create table APPOINTMENT
+(APPT_NUM number(38),
+APPT_DATE date,
+APPT_TIME varchar2(38),
+PAT_NUM number(38),
+DOC_ID number(38),
+APPT_SCHED varchar(38),
+constraint APPOINTMENT_APPT_NUM_PK primary key(APPT_NUM));
+
+create table DOCTOR
+(DOC_ID number(38),
+DOC_LNAME varchar2(38),
+DOC_FNAME varchar2(38),
+DOC_EXTENSION varchar2(38),
+DOC_OFFICE varchar2(38),
+constraint DOCTOR_DOC_ID_PK primary key(DOC_ID));
+
+create table PAT_PAYMENT
+(PATPAY_NUM number(38),
+BILL_CODE number(38),
+PATPAY_DATE date,
+PATPAY_AMOUNT number(38),
+PATPAY_TYPE varchar2(38),
+PAT_NUM number(38),
+constraint PAT_PAYMENT_PATPAY_NUM_PK primary key(PATPAY_NUM));
+
+create table VISIT
+(VISIT_NUM number(38),
+DOC_ID number(38),
+PAT_NUM number(38),
+VISIT_DATE date,
+VISIT_TIME varchar2(38),
+VISLINE_PROBLEM varchar2(38),
+VISLINE_DIAGNOSIS varchar2(38),
+VISLINE_CHARGE varchar2(38),
+constraint VISIT_VISIT_NUM_PK primary key(VISIT_NUM));
+
+create table BILLING
+(BILL_CODE number(38),
+BILL_DATE date,
+BILL_CHG_AMOUNT varchar2(38),
+BILL_PAY_AMOUNT varchar2(38),
+BILL_PAY_DATE date,
+BILL_BALANCE varchar2(38),
+VISIT_NUM number(38),
+constraint BILLING_BILL_CODE_PK primary key(BILL_CODE));
+
+create table INSURANCE
+(INSUR_CODE number(38),
+INSUR_NAME varchar2(38),
+INSUR_CONTACT varchar2(38),
+INSUR_EMAIL varchar2(38),
+INSUR_PHONE varchar2(38),
+constraint INSURANCE_INSUR_CODE_PK primary key(INSUR_CODE));
+
+create table INSURE_PAYMENT
+(INSUREPAY_NUM number(38),
+INSUR_CODE number(38),
+BILL_CODE number(38),
+INSUREPAY_DATE date,
+INSURE_AMOUNT varchar2(38),
+INSUREPAY_TYPE varchar2(38),
+constraint INSURE_PAY_NUM_PK primary key(INSUREPAY_NUM));   
+
+
+
+
